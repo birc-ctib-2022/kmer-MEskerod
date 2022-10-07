@@ -8,24 +8,62 @@ def kmer(x: str, k: int) -> list[str]:
     >>> kmer('agtagtcg', 3)
     ['agt', 'gta', 'tag', 'agt', 'gtc', 'tcg']
 
-    FIXME: do you want more tests here?
-    """
-    ...
+    >>> kmer('agta',1)
+    ['a', 'g', 't', 'a']
+    
+    >>> kmer('ag',3)
+    []
 
+    
+    """
+    if len(x) < k:
+        return []
+    result = [x[i:i+k] for i in range(len(x)-(k-1))]
+    return result
+
+    ...
 
 def unique_kmers(x: str, k: int) -> list[str]:
     """
     Computer all unique k-mers of x.
 
-    FIXME: do you want more tests here?
-    """
-    ...
+    >>> unique_kmers('agtagtagt',3)
+    ['tag', 'gta', 'agt']
 
+    >>> unique_kmers('ag', 3)
+    []
+    
+    >>> unique_kmers('aaaaaaaaaa', 1)
+    ['a']
+    """
+
+    if len(x) < k: 
+        return []
+    myset = set([x[i:i+k] for i in range(len(x)-(k-1))])
+    result = list(myset)
+    return result
+    ...
 
 def count_kmers(x: str, k: int) -> dict[str, int]:
     """
     Computer all k-mers of x and count how often they appear.
 
-    FIXME: do you want more tests here?
+    >>> count_kmers('aaaaa',1)
+    {'a': 5}
+
+    >>> count_kmers('ag', 3)
+    []
+
     """
+    if len(x) < k: 
+        return [] 
+    result = {}
+    for i in range(len(x)-(k-1)):
+        kmer = x[i:i+k]
+        if kmer not in result:
+            result[kmer]=1
+        else:
+            result[kmer] += 1
+    return result
+    
     ...
