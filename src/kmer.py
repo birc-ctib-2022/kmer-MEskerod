@@ -12,11 +12,12 @@ def kmer(x: str, k: int) -> list[str]:
     ['a', 'g', 't', 'a']
     
     >>> kmer('ag',3)
+    []
 
     
     """
     if len(x) < k:
-        return None
+        return []
     result = [x[i:i+k] for i in range(len(x)-(k-1))]
     return result
 
@@ -27,21 +28,19 @@ def unique_kmers(x: str, k: int) -> list[str]:
     Computer all unique k-mers of x.
 
     >>> unique_kmers('agtagtagt',3)
-    ['agt', 'gta', 'tag']
+    ['tag', 'gta', 'agt']
 
     >>> unique_kmers('ag', 3)
+    []
     
     >>> unique_kmers('aaaaaaaaaa', 1)
     ['a']
     """
 
     if len(x) < k: 
-        return None
-    result = []
-    for i in range(len(x)-(k-1)):
-        kmer = x[i:i+k]
-        if kmer not in result:
-            result.append(kmer)
+        return []
+    myset = set([x[i:i+k] for i in range(len(x)-(k-1))])
+    result = list(myset)
     return result
     ...
 
@@ -53,10 +52,11 @@ def count_kmers(x: str, k: int) -> dict[str, int]:
     {'a': 5}
 
     >>> count_kmers('ag', 3)
+    []
 
     """
     if len(x) < k: 
-        return None 
+        return [] 
     result = {}
     for i in range(len(x)-(k-1)):
         kmer = x[i:i+k]
